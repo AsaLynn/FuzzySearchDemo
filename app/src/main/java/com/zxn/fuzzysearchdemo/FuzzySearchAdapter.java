@@ -1,12 +1,11 @@
 package com.zxn.fuzzysearchdemo;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.zxn.fuzzysearch.FuzzySearchBaseAdapter;
 import com.zxn.fuzzysearch.IFuzzySearchRule;
 
@@ -14,41 +13,45 @@ import java.util.List;
 
 public class FuzzySearchAdapter extends FuzzySearchBaseAdapter<ItemEntity, FuzzySearchAdapter.ItemHolder> {
 
-	public FuzzySearchAdapter() {
-		super(null);
-	}
+    public FuzzySearchAdapter(List<ItemEntity> dataList) {
+        super(null, dataList, R.layout.item_adapter);
+    }
 
-	public FuzzySearchAdapter(IFuzzySearchRule rule) {
-		super(rule);
-	}
+    public FuzzySearchAdapter(IFuzzySearchRule rule, List<ItemEntity> dataList) {
+        super(rule, dataList, R.layout.item_adapter);
+    }
+//    public FuzzySearchAdapter() {
+//        super(null);
+//    }
+//
+//    public FuzzySearchAdapter(IFuzzySearchRule rule) {
+//        super(rule);
+//    }
+//
+//    public FuzzySearchAdapter(List<ItemEntity> dataList) {
+//        super(null, dataList);
+//    }
 
-	public FuzzySearchAdapter(List<ItemEntity> dataList) {
-		super(null, dataList);
-	}
+    @Override
+    protected void convert(@NonNull ItemHolder helper, ItemEntity item) {
+        TextView mTextName = helper.getView(R.id.text_item_name);
+        mTextName.setText(item.getValue());
 
-	public FuzzySearchAdapter(IFuzzySearchRule rule, List<ItemEntity> dataList) {
-		super(rule, dataList);
-	}
+        //helper.mTextName.setText(item.getValue());
+    }
 
-	@NonNull
-	@Override
-	public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		return new FuzzySearchAdapter.ItemHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_adapter, parent, false));
-	}
+//    public FuzzySearchAdapter(IFuzzySearchRule rule, List<ItemEntity> dataList) {
+//        super(rule, dataList);
+//    }
 
-	@Override
-	public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
-		holder.mTextName.setText(mDataList.get(position).getValue());
-	}
+    static class ItemHolder extends BaseViewHolder {
 
-	static class ItemHolder extends RecyclerView.ViewHolder {
-
-		TextView mTextName;
-
-		ItemHolder(View itemView) {
-			super(itemView);
-			mTextName = itemView.findViewById(R.id.text_item_name);
-		}
-	}
+//        public TextView mTextName;
+//
+        ItemHolder(View itemView) {
+            super(itemView);
+            //mTextName = itemView.findViewById(R.id.text_item_name);
+        }
+    }
 
 }
