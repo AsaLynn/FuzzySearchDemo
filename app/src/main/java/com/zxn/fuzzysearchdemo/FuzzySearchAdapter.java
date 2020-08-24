@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.zxn.fuzzysearch.FuzzySearchBaseAdapter;
 import com.zxn.fuzzysearch.IFuzzySearchRule;
 

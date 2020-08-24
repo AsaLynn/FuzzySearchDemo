@@ -7,10 +7,11 @@ import android.widget.Filterable;
 import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Updated by zxn on 2020/7/7.
@@ -29,6 +30,11 @@ public abstract class FuzzySearchBaseAdapter<ITEM extends IFuzzySearchItem, K ex
         }
         mBackDataList = dataList;
     }
+
+//    @Override
+//    public void setNewInstance(@org.jetbrains.annotations.Nullable List<ITEM> list) {
+//        super.setNewInstance(list);
+//    }
 
     @Override
     public void setNewData(@Nullable List<ITEM> data) {
@@ -74,7 +80,8 @@ public abstract class FuzzySearchBaseAdapter<ITEM extends IFuzzySearchItem, K ex
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mData = (List<ITEM>) results.values;
+            //mData = (List<ITEM>) results.values;
+            setNewData((List<ITEM>) results.values);
             notifyDataSetChanged();
         }
     }
