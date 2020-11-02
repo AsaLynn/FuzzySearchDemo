@@ -21,8 +21,6 @@ import java.util.*
  */
 class MainActivity : AppCompatActivity() {
     private var mContext: Context? = null
-    private var mViewHolder: View? = null
-    private var mLayoutFuzzySearch: ViewGroup? = null
     private var mFuzzySearchAdapter: FuzzySearchAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +32,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        mViewHolder = findViewById(R.id.view_holder_for_focus)
-        mLayoutFuzzySearch = findViewById(R.id.layout_fuzzy_search)
         recycler_fuzzy_search_list.layoutManager = LinearLayoutManager(mContext)
     }
 
@@ -55,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         mEditSearchInput!!.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                mFuzzySearchAdapter!!.filter.filter(s)
+                mFuzzySearchAdapter!!.filter?.filter(s)
             }
 
             override fun afterTextChanged(s: Editable) {}
@@ -66,11 +62,10 @@ class MainActivity : AppCompatActivity() {
         val dateList = fillData(resources.getStringArray(R.array.region))
         // 这里我们先排序
         //Collections.sort(dateList, new LettersComparator<ItemEntity>());
-        recycler_fuzzy_search_list!!.adapter =
-            FuzzySearchAdapter(dateList).also { mFuzzySearchAdapter = it }
+        recycler_fuzzy_search_list!!.adapter = FuzzySearchAdapter(dateList).also { mFuzzySearchAdapter = it }
     }
 
-    private fun fillData(date: Array<String>): List<ItemEntity> {
+    private fun fillData(date: Array<String>): MutableList<ItemEntity> {
         val sortList: MutableList<ItemEntity> = ArrayList()
         for (item in date) {
             var letter: String

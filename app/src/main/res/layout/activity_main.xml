@@ -12,7 +12,7 @@
 
         <!-- 添加这个View是为了控制EditText的焦点问题 -->
         <View
-            android:id="@+id/view_holder_for_focus"
+            android:id="@+id/mViewHolder"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:focusable="true"
@@ -50,7 +50,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/layout_fuzzy_search"
+            android:id="@+id/mLayoutFuzzySearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
