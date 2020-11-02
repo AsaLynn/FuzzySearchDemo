@@ -14,7 +14,7 @@ import java.util.List;
 
 
 /**
- * Updated by zxn on 2020/7/7.
+ *  Updated by zxn on 2020/11/2.
  */
 public abstract class FuzzySearchBaseAdapter<ITEM extends IFuzzySearchItem, K extends BaseViewHolder>
         extends BaseQuickAdapter<ITEM, K> implements Filterable {
@@ -30,11 +30,6 @@ public abstract class FuzzySearchBaseAdapter<ITEM extends IFuzzySearchItem, K ex
         }
         mBackDataList = dataList;
     }
-
-//    @Override
-//    public void setNewInstance(@org.jetbrains.annotations.Nullable List<ITEM> list) {
-//        super.setNewInstance(list);
-//    }
 
     @Override
     public void setNewData(@Nullable List<ITEM> data) {

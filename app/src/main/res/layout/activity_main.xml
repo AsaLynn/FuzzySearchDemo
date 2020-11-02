@@ -19,7 +19,7 @@
             android:focusableInTouchMode="true" />
 
         <TextView
-            android:id="@+id/text_search_cancel"
+            android:id="@+id/mTextCancel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
@@ -30,12 +30,12 @@
             android:text="@string/cancel"
             android:textSize="14sp" />
 
-        <com.zxn.fuzzysearchdemo.searchview.ClearEditText
-            android:id="@+id/edit_search_input"
+        <com.zxn.widget.ExpandEditText
+            android:id="@+id/mEditSearchInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
-            android:layout_toStartOf="@+id/text_search_cancel"
+            android:layout_toStartOf="@+id/mTextCancel"
             android:background="@drawable/shape_search_input"
             android:drawablePadding="4dp"
             android:gravity="center_vertical"
