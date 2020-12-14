@@ -15,7 +15,7 @@ abstract class FuzzySearchBaseAdapter<ITEM : IFuzzySearchItem, K : BaseViewHolde
     dataList: MutableList<ITEM>?,
     layoutResId: Int
 ) : BaseQuickAdapter<ITEM, K>(layoutResId, dataList), Filterable {
-    private var mFilter: FuzzySearchFilter? = null
+    private var mFilter: FuzzySearchFilter = FuzzySearchFilter()
     var backDataList: MutableList<ITEM>?
     private var mIFuzzySearchRule: IFuzzySearchRule? = null
 
@@ -32,12 +32,7 @@ abstract class FuzzySearchBaseAdapter<ITEM : IFuzzySearchItem, K : BaseViewHolde
         backDataList = data
     }
 
-    override fun getFilter(): Filter? {
-        if (mFilter == null) {
-            mFilter = FuzzySearchFilter()
-        }
-        return mFilter
-    }
+    override fun getFilter(): Filter  = mFilter
 
     private inner class FuzzySearchFilter : Filter() {
         /**
@@ -66,11 +61,16 @@ abstract class FuzzySearchBaseAdapter<ITEM : IFuzzySearchItem, K : BaseViewHolde
          */
         override fun publishResults(constraint: CharSequence, results: FilterResults) {
             //setNewData(results.values as MutableList<ITEM>)
-            setList(results.values as MutableList<ITEM>)
-            notifyDataSetChanged()
+            if (results.values == null) {
+                setList(null)
+            } else {
+                if (results.values is MutableList<*>) {
+                    setList(results.values as MutableList<ITEM>)
+                }
+            }
+            //notifyDataSetChanged()
         }
     }
-
 
     @Deprecated("使用setList代替")
     override fun setNewData(data: MutableList<ITEM>?) {
