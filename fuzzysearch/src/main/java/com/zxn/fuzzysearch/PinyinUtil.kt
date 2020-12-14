@@ -849,11 +849,11 @@ object PinyinUtil {
      * @param source 原始字符
      * @return 中国["zhong", "guo"]
      */
-    fun getPinYinList(source: String?): List<String?>? {
+    fun getPinYinList(source: String): List<String>? {
         if (source == null || source.isEmpty()) {
             return null
         }
-        val pinyinList: MutableList<String?> = ArrayList()
+        val pinyinList: MutableList<String> = ArrayList()
         for (i in 0 until source.length) {
             val item = source.substring(i, i + 1)
             if (item.toByteArray().size >= 2) {

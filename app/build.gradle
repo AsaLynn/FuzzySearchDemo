@@ -32,4 +32,5 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
     implementation 'com.zxn.widget:expand-widget:1.1.9'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }

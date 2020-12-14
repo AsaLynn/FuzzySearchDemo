@@ -17,13 +17,13 @@ import java.util.*
 /**
  *  Updated by zxn on 2020/11/2.
  */
-class MainActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity() {
 
     companion object {
 
         @JvmStatic
         fun jumpTo(context: Context) {
-            context.startActivity(Intent(context, MainActivity::class.java))
+            context.startActivity(Intent(context, SearchActivity::class.java))
         }
 
     }
@@ -60,7 +60,15 @@ class MainActivity : AppCompatActivity() {
         mEditSearchInput!!.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                mFuzzySearchAdapter!!.filter?.filter(s)
+                mFuzzySearchAdapter?.let {
+                    if (s.isEmpty()) {
+                        //it.backDataList =
+                        it.setList(null)
+                        it.backDataList = fillData(resources.getStringArray(R.array.region))
+                    } else {
+                        mFuzzySearchAdapter!!.filter?.filter(s)
+                    }
+                }
             }
 
             override fun afterTextChanged(s: Editable) {}
@@ -71,8 +79,10 @@ class MainActivity : AppCompatActivity() {
         val dateList = fillData(resources.getStringArray(R.array.region))
         // 这里我们先排序
         //Collections.sort(dateList, new LettersComparator<ItemEntity>());
-        recycler_fuzzy_search_list!!.adapter =
-            FuzzySearchAdapter(dateList).also { mFuzzySearchAdapter = it }
+        recycler_fuzzy_search_list.adapter = FuzzySearchAdapter().also {
+            it.backDataList = dateList
+            mFuzzySearchAdapter = it
+        }
     }
 
     private fun fillData(date: Array<String>): MutableList<ItemEntity> {

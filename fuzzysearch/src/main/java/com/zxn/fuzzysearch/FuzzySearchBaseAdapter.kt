@@ -16,20 +16,20 @@ abstract class FuzzySearchBaseAdapter<ITEM : IFuzzySearchItem, K : BaseViewHolde
     layoutResId: Int
 ) : BaseQuickAdapter<ITEM, K>(layoutResId, dataList), Filterable {
     private var mFilter: FuzzySearchFilter? = null
-    private var mBackDataList: MutableList<ITEM>?
+    var backDataList: MutableList<ITEM>?
     private var mIFuzzySearchRule: IFuzzySearchRule? = null
 
     init {
         if (rule == null) {
             mIFuzzySearchRule = DefaultFuzzySearchRule()
         }
-        mBackDataList = dataList
+        backDataList = dataList
     }
 
 
     override fun setList(list: Collection<ITEM>?) {
         super.setList(list)
-        mBackDataList = data
+        backDataList = data
     }
 
     override fun getFilter(): Filter? {
@@ -47,10 +47,10 @@ abstract class FuzzySearchBaseAdapter<ITEM : IFuzzySearchItem, K : BaseViewHolde
             val result = FilterResults()
             val filterList: MutableList<ITEM>?
             if (TextUtils.isEmpty(constraint)) {
-                filterList = mBackDataList
+                filterList = backDataList
             } else {
                 filterList = ArrayList()
-                for (item in mBackDataList!!) {
+                for (item in backDataList!!) {
                     if (mIFuzzySearchRule!!.accept(constraint, item!!.sourceKey, item.fuzzyKey)) {
                         filterList.add(item)
                     }
@@ -72,9 +72,10 @@ abstract class FuzzySearchBaseAdapter<ITEM : IFuzzySearchItem, K : BaseViewHolde
     }
 
 
+    @Deprecated("使用setList代替")
+    override fun setNewData(data: MutableList<ITEM>?) {
+        super.setNewData(data)
+        backDataList = data
+    }
 
-//    override fun setNewData(data: MutableList<ITEM>?) {
-//        super.setNewData(data)
-//        mBackDataList = data
-//    }
 }
